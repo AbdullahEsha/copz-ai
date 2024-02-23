@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ConnectButton,
   JoinButton,
@@ -6,7 +8,8 @@ import {
   WorkspaceButton,
 } from '@/components/button'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import FacebookLogin from 'react-facebook-login'
 import { PiCircleHalfTiltLight, PiHouse } from 'react-icons/pi'
 import { BsStars } from 'react-icons/bs'
 import {
@@ -26,8 +29,27 @@ import { AiOutlineFileImage } from 'react-icons/ai'
 import { RxDoubleArrowRight } from 'react-icons/rx'
 
 const Home: FC = () => {
+  const [accessToken, setAccessToken] = useState('')
+  const componentClicked = (data: any) => {
+    console.log('data', data)
+  }
+
+  const responseFacebook = (response: any) => {
+    // console.log(response.accessToken);
+    setAccessToken(response.accessToken)
+  }
+
   return (
-    <div className="container mx-auto flex items-center my-28">
+    <div className="container mx-auto my-28">
+      <p>AccessToken: {accessToken || ''}</p>
+      <FacebookLogin
+        appId={process.env.APP_ID || ''}
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={componentClicked}
+        callback={responseFacebook}
+      />
+
       <div className="rounded-2xl border border-gray-400 w-full flex justify-between">
         <div className="w-[35rem] border-r border-gray-400 px-6 py-8 flex flex-col">
           <div className="max-h-12 flex gap-3 items-center">
