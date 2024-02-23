@@ -2,14 +2,13 @@
 
 import {
   ConnectButton,
-  JoinButton,
   RainbowButton,
   SideBarButton,
   WorkspaceButton,
 } from '@/components/button'
+import { AIGenerate } from '@/components/middle'
 import Image from 'next/image'
 import { FC, useState } from 'react'
-import FacebookLogin from 'react-facebook-login'
 import { PiCircleHalfTiltLight, PiHouse } from 'react-icons/pi'
 import { BsStars } from 'react-icons/bs'
 import {
@@ -18,38 +17,15 @@ import {
   HiOutlineDocumentText,
   HiOutlineStar,
 } from 'react-icons/hi2'
-import {
-  IoCalendarOutline,
-  IoCheckmarkSharp,
-  IoDocumentTextOutline,
-} from 'react-icons/io5'
+import { IoCalendarOutline, IoCheckmarkSharp } from 'react-icons/io5'
 import { SlSettings } from 'react-icons/sl'
-import { IoMdCopy } from 'react-icons/io'
-import { AiOutlineFileImage } from 'react-icons/ai'
 import { RxDoubleArrowRight } from 'react-icons/rx'
 
 const Home: FC = () => {
-  const [accessToken, setAccessToken] = useState('')
-  const componentClicked = (data: any) => {
-    console.log('data', data)
-  }
-
-  const responseFacebook = (response: any) => {
-    // console.log(response.accessToken);
-    setAccessToken(response.accessToken)
-  }
+  const [middle, setMiddle] = useState('ai-generate')
 
   return (
     <div className="container mx-auto my-28">
-      <p>AccessToken: {accessToken || ''}</p>
-      <FacebookLogin
-        appId={process.env.APP_ID || ''}
-        autoLoad={true}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
-      />
-
       <div className="rounded-2xl border border-gray-400 w-full flex justify-between">
         <div className="w-[35rem] border-r border-gray-400 px-6 py-8 flex flex-col">
           <div className="max-h-12 flex gap-3 items-center">
@@ -66,11 +42,11 @@ const Home: FC = () => {
             </h1>
           </div>
           <div className="my-6">
-            <SideBarButton>
+            <SideBarButton onClick={() => setMiddle('dashboard')}>
               <PiHouse size={20} />
               Dashboard
             </SideBarButton>
-            <SideBarButton>
+            <SideBarButton onClick={() => setMiddle('ai-generate')}>
               <BsStars size={20} /> AI Generate
             </SideBarButton>
             <SideBarButton>
@@ -98,38 +74,7 @@ const Home: FC = () => {
             </WorkspaceButton>
           </div>
         </div>
-        <div className="p-10  w-full">
-          <h3 className="text-3xl font-semibold">Ai generate</h3>
-          <div className="my-6 py-4 rounded-lg w-full flex justify-between bg-gray-800 shadow-md">
-            <JoinButton>
-              <IoDocumentTextOutline size={20} />
-              Article
-            </JoinButton>
-            <span className="text-gray-400">|</span>
-            <JoinButton>
-              <AiOutlineFileImage size={20} />
-              Image
-            </JoinButton>
-            <span className="text-gray-400">|</span>
-            <JoinButton>
-              <IoMdCopy size={20} />
-              Copy
-            </JoinButton>
-          </div>
-          <h1 className="text-5xl font-semibold">The Potential of AI Power</h1>
-          <p className="text-xsmall mt-3">
-            We are on a mission to revolutionize the way businesses leverage
-            artificial intelligence. With a team of dedicated experts and a
-            commitment to innovation, we strive to make AI accessible
-          </p>
-          <Image
-            src="/image/brain-image.jpeg"
-            alt="Ai Generated Image"
-            height={1200}
-            width={2000}
-            className="rounded-lg mt-6 w-full h-auto object-cover"
-          />
-        </div>
+        {middle === 'ai-generate' && <AIGenerate />}
         <div className="w-[35rem] border-l border-gray-400 px-6 py-8 flex flex-col gap-5">
           <div className="w-full flex justify-end">
             <ConnectButton>
