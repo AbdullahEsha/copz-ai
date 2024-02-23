@@ -30,16 +30,16 @@ body {
 
 /* Text */
 .text-link {
-  @apply text-[1.6rem] md:text-[1.3rem] lg:text-[1.4rem] text-[#343];
+  @apply text-[1.6rem] md:text-[1.3rem] lg:text-[1.4rem] text-gray-400;
 }
 .text-small {
-  @apply text-[1.5rem] sm:text-[1.4rem] lg:text-[1.4rem] text-[#343] leading-[1.4] text-center  md:text-justify;
+  @apply text-[1.5rem] sm:text-[1.4rem] lg:text-[1.4rem] text-gray-400 leading-[1.4] text-center  md:text-justify;
 }
 .text-xsmall {
-  @apply text-[1.3rem]  text-[#343] leading-[1.4] text-center  md:text-justify;
+  @apply text-[1.1rem] text-gray-400 leading-[1.4] text-center  md:text-justify;
 }
 .text-base {
-  @apply text-[1.6rem] sm:text-[1.8rem] md:text-[1.6rem] leading-[143%] text-center  md:text-justify text-[#343];
+  @apply text-[1.6rem] sm:text-[1.8rem] md:text-[1.6rem] leading-[143%] text-center  md:text-justify text-gray-400;
 }
 .info-text {
   @apply text-[2.2rem] md:text-[3rem]  text-[#fff];
@@ -47,7 +47,7 @@ body {
 
 /* Header */
 .heading-primary {
-  @apply text-[2.8rem] sm:text-[3.4rem]  leading-[3.4rem]  lg:text-[3.8rem] xl:text-[4.2rem] 2xl:text-[4.8rem] lg:leading-[4.9rem]  font-[700] mb-[1.5rem] md:mb-[2.5rem] text-center md:text-start;
+  @apply text-[2rem] sm:text-[2.4rem]  leading-[2.8rem]  lg:text-[3.2rem] xl:text-[3.6rem] 2xl:text-[4.8rem] lg:leading-[4.9rem]  font-[700] mb-[1.5rem] md:mb-[2.5rem] text-center md:text-start;
 }
 .heading-secondary {
   @apply text-2xl font-semibold mb-[0.4rem];
