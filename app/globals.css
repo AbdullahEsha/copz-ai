@@ -61,3 +61,11 @@ body {
 .heading-five {
   @apply font-medium text-sm md:text-base;
 }
+
+/* add background image "background.png */
+.background-dot-image {
+  background: url('/image/background.png') center no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+}
