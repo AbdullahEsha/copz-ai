@@ -30,20 +30,17 @@ export const AIGenerate: FC = () => {
       return
     }
 
-    const response = await fetch(
-      `https://graph.facebook.com/v19.0/${PAGE_ID}/feed`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `${heading} ${text}`,
-          access_token: accessTokens,
-          app_id: APP_ID,
-        }),
+    const response = await fetch(`https://graph.facebook.com/${PAGE_ID}/feed`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+      body: JSON.stringify({
+        message: `${heading} ${text}`,
+        access_token: accessTokens,
+        app_id: APP_ID,
+      }),
+    })
     if (!response.ok) {
       toast.error('Failed to upload post to facebook')
       return
