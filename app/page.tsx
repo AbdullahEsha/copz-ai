@@ -20,12 +20,30 @@ import {
 import { IoCalendarOutline, IoCheckmarkSharp } from 'react-icons/io5'
 import { SlSettings } from 'react-icons/sl'
 import { RxDoubleArrowRight } from 'react-icons/rx'
+import FacebookLogin from 'react-facebook-login'
 
 const Home: FC = () => {
   const [middle, setMiddle] = useState('ai-generate')
+  const [accessTokens, setAccessTokens] = useState('')
+
+  const responseFacebook = (response: any) => {
+    console.log(response)
+    setAccessTokens(response.accessToken)
+  }
+
+  const componentClicked = (data: any) => {
+    console.log(data)
+  }
 
   return (
     <div className="container mx-auto my-28">
+      <FacebookLogin
+        appId={process.env.APP_ID || ''}
+        autoLoad={true}
+        fields="name,email,picture"
+        onClick={componentClicked}
+        callback={responseFacebook}
+      />
       <div className="rounded-2xl border border-gray-400 w-full flex justify-between">
         <div className="w-[35rem] border-r border-gray-400 px-6 py-8 flex flex-col">
           <div className="max-h-12 flex gap-3 items-center">
