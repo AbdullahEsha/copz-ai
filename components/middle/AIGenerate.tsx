@@ -15,6 +15,7 @@ export const AIGenerate: FC = () => {
     const accessTokens = Cookies.get('accessTokens')
     // convert PAGE_ID to number
     const PAGE_ID = Number(process.env.PAGE_ID)
+    const APP_ID = Number(process.env.APP_ID)
 
     if (!accessTokens) {
       toast.error('Please login to facebook')
@@ -39,6 +40,7 @@ export const AIGenerate: FC = () => {
         body: JSON.stringify({
           message: `${heading} ${text}`,
           access_token: accessTokens,
+          app_id: APP_ID,
         }),
       },
     )
