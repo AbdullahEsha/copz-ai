@@ -1,11 +1,44 @@
 import { FC } from 'react'
-import { JoinButton } from '../button'
+import { FacebookButton, JoinButton } from '../button'
 import { IoDocumentTextOutline } from 'react-icons/io5'
 import { AiOutlineFileImage } from 'react-icons/ai'
 import { IoMdCopy } from 'react-icons/io'
 import Image from 'next/image'
+import Cookies from 'js-cookie'
+import toast from 'react-hot-toast'
 
 export const AIGenerate: FC = () => {
+  //  postUpload with event handler
+  const postUpload = async (e: any) => {
+    e.preventDefault()
+    // upload a post to facebook page with facebook graph api as accessTokens from cookies
+    const accessTokens = Cookies.get('accessTokens')
+
+    if (!accessTokens) {
+      toast.error('Please login to facebook')
+      return
+    }
+
+    const heading = e.target.heading.value
+    const text = e.target.text.value
+
+    console.log('heading', heading)
+    console.log('text', text)
+
+    const url = `https://graph.facebook.com/v19.0/me/feed?message=${heading} ${text}&access_token=${accessTokens}`
+    const response = await fetch(url, {
+      method: 'POST',
+    })
+    if (response.ok) {
+      // console.log('Post uploaded')
+      toast.success('Post uploaded!')
+      const data = await response.json()
+      console.log(data)
+    } else {
+      toast.error('Failed to upload post to facebook page')
+    }
+  }
+
   return (
     <div className="p-10  w-full">
       <h3 className="text-3xl font-semibold">Ai generate</h3>
@@ -25,19 +58,32 @@ export const AIGenerate: FC = () => {
           Copy
         </JoinButton>
       </div>
-      <h1 className="text-5xl font-semibold">The Potential of AI Power</h1>
-      <p className="text-xsmall mt-3">
-        We are on a mission to revolutionize the way businesses leverage
-        artificial intelligence. With a team of dedicated experts and a
-        commitment to innovation, we strive to make AI accessible
-      </p>
-      <Image
-        src="/image/brain-image.jpeg"
-        alt="Ai Generated Image"
-        height={1200}
-        width={2000}
-        className="rounded-lg mt-6 w-full h-auto object-cover"
-      />
+      <form onSubmit={postUpload}>
+        <input
+          type="text"
+          className="text-5xl w-full mt-6 p-4 rounded-lg bg-gray-800 text-gray-400 focus:outline-none"
+          placeholder="Write some heading here..."
+          name="heading"
+        />
+        <textarea
+          className="w-full h-40 mt-6 p-4 rounded-lg bg-gray-800 text-gray-400 focus:outline-none"
+          placeholder="Write some text here..."
+          name="text"
+        />
+        <Image
+          src="/image/brain-image.jpeg"
+          alt="Ai Generated Image"
+          height={1200}
+          width={2000}
+          className="rounded-lg mt-6 w-full h-auto object-cover"
+        />
+        <div className="flex justify-end">
+          <FacebookButton name="submit" type="submit">
+            <IoDocumentTextOutline size={20} />
+            Upload to Facebook
+          </FacebookButton>
+        </div>
+      </form>
     </div>
   )
 }
