@@ -30,7 +30,7 @@ export const AIGenerate: FC = () => {
     }
     // fetch post request to facebook graph api
     const response = await fetch(
-      `https://graph.facebook.com/${PAGE_ID}/feed?message=${heading}&access_token=${accessTokens}`,
+      `https://graph.facebook.com/102042315874503/feed?message=hello world&access_token=EAAD7JwzoPAoBO8ZAGmh5GnwJLKXbDwynWDNUkuaxPxRqvOJLJDzvjYjbY9dcnec9SZBzxUtTLjkWlMIa43Ixa8TZCZAsZCJEnnz6pWSRG05MIu1UYk9gr14QIMrzBbFBWyd4TGCaJRUsSgCTNR3e2EG31rGxgkZByyAzRxL3gLQd12tBSa8dzDJW0tUeeVRlL3XEWlD6W0dxjnIMrQMqSmZBtsZD`,
       {
         method: 'POST',
         headers: {
