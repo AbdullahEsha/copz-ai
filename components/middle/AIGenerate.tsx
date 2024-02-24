@@ -29,19 +29,24 @@ export const AIGenerate: FC = () => {
       toast.error('Please fill all the fields')
       return
     }
-
     // fetch post request to facebook graph api
-    const url = `https://graph.facebook.com/${PAGE_ID}/feed`
+    const url = `https://graph.facebook.com/${PAGE_ID}/feed?message=${heading}&access_token=${accessTokens}`
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        message: heading + ' ' + text,
+        message: text,
         access_token: accessTokens,
       }),
     })
+
+    if (response.ok) {
+      toast.success('Post uploaded to facebook')
+    } else {
+      toast.error('Error uploading post to facebook')
+    }
   }
 
   return (
