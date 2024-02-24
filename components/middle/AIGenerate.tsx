@@ -15,6 +15,7 @@ export const AIGenerate: FC = () => {
     // const accessTokens = Cookies.get('accessTokens')
     // convert PAGE_ID to number
     const ACCESS_TOKEN = process.env.ACCESS_TOKEN as string
+    const PAGE_ID = process.env.PAGE_ID
 
     if (!ACCESS_TOKEN) {
       toast.error('Please login to facebook')
@@ -30,7 +31,7 @@ export const AIGenerate: FC = () => {
     }
     // fetch post request to facebook graph api
     const response = await fetch(
-      `https://graph.facebook.com/v11.0/100000000000000/feed?message=${heading}&access_token=${ACCESS_TOKEN}`,
+      `https://graph.facebook.com/${PAGE_ID}/feed?message=${heading}&access_token=${ACCESS_TOKEN}`,
       {
         method: 'POST',
       },
