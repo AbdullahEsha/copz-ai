@@ -1,5 +1,4 @@
 export * from './SideBarButton'
 export * from './WorkspaceButton'
 export * from './JoinButton'
-export * from './ConnectButton'
 export * from './RainbowButton'

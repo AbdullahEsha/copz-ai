@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  ConnectButton,
   RainbowButton,
   SideBarButton,
   WorkspaceButton,
@@ -35,15 +34,10 @@ const Home: FC = () => {
     console.log(data)
   }
 
+  console.log('accessTokens', accessTokens)
+
   return (
     <div className="container mx-auto my-28">
-      <FacebookLogin
-        appId={process.env.APP_ID || ''}
-        autoLoad={true}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
-      />
       <div className="rounded-2xl border border-gray-400 w-full flex justify-between">
         <div className="w-[35rem] border-r border-gray-400 px-6 py-8 flex flex-col">
           <div className="max-h-12 flex gap-3 items-center">
@@ -54,7 +48,6 @@ const Home: FC = () => {
               height={43}
               className="h-10 w-auto"
             />
-            {/* text gradient of three colors  background: linear-gradient(90deg, #FFCC70 11.68%, #C850C0 50.19%, #4158D0 88.71%); */}
             <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500">
               Copz AI
             </h1>
@@ -95,9 +88,14 @@ const Home: FC = () => {
         {middle === 'ai-generate' && <AIGenerate />}
         <div className="w-[35rem] border-l border-gray-400 px-6 py-8 flex flex-col gap-5">
           <div className="w-full flex justify-end">
-            <ConnectButton>
-              Hide assistant <RxDoubleArrowRight size={20} />
-            </ConnectButton>
+            <FacebookLogin
+              appId={process.env.APP_ID || ''}
+              fields="name,email,picture"
+              onClick={componentClicked}
+              callback={responseFacebook}
+              cssClass="flex gap-2 items-center hover:text-white text-blue-400 border border-blue-400 hover:border-white rounded-full py-2 px-4"
+              textButton={`Connect Facebook`}
+            />
           </div>
           <div className="bg-gray-800 rounded-lg shadow-md p-3">
             <div className="flex justify-between items-center">
