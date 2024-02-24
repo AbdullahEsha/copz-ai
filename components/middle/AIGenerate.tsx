@@ -12,11 +12,11 @@ export const AIGenerate: FC = () => {
   const postUpload = async (e: any) => {
     e.preventDefault()
     // upload a post to facebook page with facebook graph api as accessTokens from cookies
-    const accessTokens = Cookies.get('accessTokens')
+    // const accessTokens = Cookies.get('accessTokens')
     // convert PAGE_ID to number
-    const PAGE_ID = process.env.PAGE_ID as string
+    const ACCESS_TOKEN = process.env.ACCESS_TOKEN as string
 
-    if (!accessTokens) {
+    if (!ACCESS_TOKEN) {
       toast.error('Please login to facebook')
       return
     }
@@ -30,12 +30,9 @@ export const AIGenerate: FC = () => {
     }
     // fetch post request to facebook graph api
     const response = await fetch(
-      `https://graph.facebook.com/102042315874503/feed?message=hello world&access_token=EAAD7JwzoPAoBO8ZAGmh5GnwJLKXbDwynWDNUkuaxPxRqvOJLJDzvjYjbY9dcnec9SZBzxUtTLjkWlMIa43Ixa8TZCZAsZCJEnnz6pWSRG05MIu1UYk9gr14QIMrzBbFBWyd4TGCaJRUsSgCTNR3e2EG31rGxgkZByyAzRxL3gLQd12tBSa8dzDJW0tUeeVRlL3XEWlD6W0dxjnIMrQMqSmZBtsZD`,
+      `https://graph.facebook.com/v11.0/100000000000000/feed?message=${heading}&access_token=${ACCESS_TOKEN}`,
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
       },
     )
 
