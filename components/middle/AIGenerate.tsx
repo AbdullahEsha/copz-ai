@@ -30,20 +30,18 @@ export const AIGenerate: FC = () => {
       return
     }
 
-    // https://graph.facebook.com/102042315874503/feed?message=hello world&access_token=EAAD7JwzoPAoBO8ZAGmh5GnwJLKXbDwynWDNUkuaxPxRqvOJLJDzvjYjbY9dcnec9SZBzxUtTLjkWlMIa43Ixa8TZCZAsZCJEnnz6pWSRG05MIu1UYk9gr14QIMrzBbFBWyd4TGCaJRUsSgCTNR3e2EG31rGxgkZByyAzRxL3gLQd12tBSa8dzDJW0tUeeVRlL3XEWlD6W0dxjnIMrQMqSmZBtsZD
-
-    const response = await fetch(
-      `https://graph.facebook.com/${PAGE_ID}/feed?message=${
-        heading + text
-      }&access_token=${accessTokens}`,
-    )
-    if (!response.ok) {
-      toast.error('Something went wrong')
-      return
-    }
-    const data = await response.json()
-    console.log('data', data)
-    toast.success('Post uploaded successfully')
+    // fetch post request to facebook graph api
+    const url = `https://graph.facebook.com/${PAGE_ID}/feed`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: heading + ' ' + text,
+        access_token: accessTokens,
+      }),
+    })
   }
 
   return (
