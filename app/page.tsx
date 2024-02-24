@@ -27,11 +27,12 @@ const Home: FC = () => {
   const [middle, setMiddle] = useState('ai-generate')
 
   const responseFacebook = (response: any) => {
+    console.log('Facebook Response: ', response)
     Cookies.set('accessTokens', response.accessToken)
   }
 
   const componentClicked = (data: any) => {
-    console.log(data)
+    console.log('Component Clicked: ', data)
   }
 
   return (

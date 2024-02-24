@@ -13,6 +13,7 @@ export const AIGenerate: FC = () => {
     e.preventDefault()
     // upload a post to facebook page with facebook graph api as accessTokens from cookies
     const accessTokens = Cookies.get('accessTokens')
+    const PAGE_ID = process.env.PAGE_ID
 
     if (!accessTokens) {
       toast.error('Please login to facebook')
@@ -22,10 +23,7 @@ export const AIGenerate: FC = () => {
     const heading = e.target.heading.value
     const text = e.target.text.value
 
-    console.log('heading', heading)
-    console.log('text', text)
-
-    const url = `https://graph.facebook.com/v19.0/me/feed?message=${heading} ${text}&access_token=${accessTokens}`
+    const url = `https://graph.facebook.com/v19.0/${PAGE_ID}/feed?message=${heading} ${text}&access_token=${accessTokens}`
     const response = await fetch(url, {
       method: 'POST',
     })
