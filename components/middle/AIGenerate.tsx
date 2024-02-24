@@ -13,7 +13,8 @@ export const AIGenerate: FC = () => {
     e.preventDefault()
     // upload a post to facebook page with facebook graph api as accessTokens from cookies
     const accessTokens = Cookies.get('accessTokens')
-    const PAGE_ID = process.env.PAGE_ID
+    // convert PAGE_ID to number
+    const PAGE_ID = Number(process.env.PAGE_ID)
 
     if (!accessTokens) {
       toast.error('Please login to facebook')
@@ -36,7 +37,7 @@ export const AIGenerate: FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: `${heading} \n ${text}`,
+          message: `${heading} ${text}`,
           access_token: accessTokens,
         }),
       },
