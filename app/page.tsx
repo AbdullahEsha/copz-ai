@@ -90,7 +90,7 @@ const Home: FC = () => {
           <div className="w-[35rem] border-l border-gray-400 px-6 py-8 flex flex-col gap-5">
             <div className="w-full flex justify-end">
               <FacebookLogin
-                appId={process.env.APP_ID || ''}
+                appId={process.env.APP_ID as string}
                 fields="name,email,picture"
                 onClick={componentClicked}
                 callback={responseFacebook}

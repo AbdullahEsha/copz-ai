@@ -23,18 +23,31 @@ export const AIGenerate: FC = () => {
     const heading = e.target.heading.value
     const text = e.target.text.value
 
-    const url = `https://graph.facebook.com/v19.0/${PAGE_ID}/feed?message=${heading} ${text}&access_token=${accessTokens}`
-    const response = await fetch(url, {
-      method: 'POST',
-    })
-    if (response.ok) {
-      // console.log('Post uploaded')
-      toast.success('Post uploaded!')
-      const data = await response.json()
-      console.log(data)
-    } else {
-      toast.error('Failed to upload post to facebook page')
+    if (!heading || !text) {
+      toast.error('Please fill all the fields')
+      return
     }
+
+    const response = await fetch(
+      `https://graph.facebook.com/v19.0/${PAGE_ID}/feed`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: `${heading} \n ${text}`,
+          access_token: accessTokens,
+        }),
+      },
+    )
+    if (!response.ok) {
+      toast.error('Failed to upload post to facebook')
+      return
+    }
+    const data = await response.json()
+    console.log('Facebook Response: ', data)
+    toast.success('Post uploaded to facebook')
   }
 
   return (
