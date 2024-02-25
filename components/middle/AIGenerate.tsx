@@ -5,6 +5,7 @@ import { AiOutlineFileImage } from 'react-icons/ai'
 import { IoMdCopy } from 'react-icons/io'
 import Image from 'next/image'
 import toast from 'react-hot-toast'
+import Cookies from 'js-cookie'
 
 export const AIGenerate: FC = () => {
   //  postUpload with event handler
@@ -12,11 +13,10 @@ export const AIGenerate: FC = () => {
     e.preventDefault()
     const schedule = new Date(e.target.schedule.value).valueOf()
     // upload a post to facebook page with facebook graph api as accessTokens from cookies
-    // const accessTokens = Cookies.get('accessTokens')
-    const ACCESS_TOKEN = process.env.ACCESS_TOKEN
+    const accessTokens = Cookies.get('accessTokens')
     const PAGE_ID = process.env.PAGE_ID
 
-    if (!ACCESS_TOKEN) {
+    if (!accessTokens) {
       toast.error('Please login to facebook')
       return
     }
@@ -32,7 +32,7 @@ export const AIGenerate: FC = () => {
     const response = await fetch(
       `https://graph.facebook.com/${PAGE_ID}/feed?message=${
         heading + text
-      }&access_token=${ACCESS_TOKEN}&scheduled_publish_time=${schedule}`,
+      }&access_token=${accessTokens}&scheduled_publish_time=${schedule}`,
       {
         method: 'POST',
         headers: {
