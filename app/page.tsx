@@ -54,7 +54,10 @@ const Home: FC = () => {
               </h1>
             </div>
             <div className="my-6">
-              <SideBarButton onClick={() => setMiddle('dashboard')}>
+              <SideBarButton
+                name="dashboard"
+                onClick={() => setMiddle('dashboard')}
+              >
                 <PiHouse size={20} />
                 Dashboard
               </SideBarButton>

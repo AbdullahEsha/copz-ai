@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import './globals.css'
+import Providers from '@/redux/provider'
 
 export const metadata: Metadata = {
   title: 'Copz-Ai',
@@ -20,7 +21,9 @@ const RootLayout = ({
         <meta name="description" content={metadata.description as string} />
         <title>{metadata.title as string}</title>
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

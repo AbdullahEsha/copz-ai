@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export const Dashboard: FC = () => {
   return (
-    <div className="p-10  w-full">
+    <div className="p-10  w-fit">
       <h3 className="text-3xl font-semibold">Ai generate</h3>
       <div className="my-6 py-4 rounded-lg w-full flex justify-between bg-gray-800 shadow-md">
         <JoinButton>
